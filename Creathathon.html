@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProfileHub</title>
     <link rel="icon" href="https://via.placeholder.com/16" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,12 +68,30 @@
         h1 {
             margin-bottom: 20px;
             color: #bb86fc;
-            font-size: 28px;
+            font-size: 36px; /* Increased font size */
+            text-align: center; /* Center the h1 */
         }
         p {
-            font-size: 20px;
-            line-height: 1.6;
+            font-size: 22px; /* Increased font size */
+            line-height: 1.8; /* Increased line height */
+            margin-bottom: 20px; /* Added margin for spacing */
         }
+        .team-member {
+            font-size: 22px;
+            margin: 10px 0;
+        }
+        /* .team-member:nth-child(1) {
+            color: #ff6f61;
+        }
+        .team-member:nth-child(2) {
+            color: #6b5b95;
+        }
+        .team-member:nth-child(3) {
+            color: #88b04b;
+        }
+        .team-member:nth-child(4) {
+            color: #f7cac9;
+        } */
         form {
             background: #1f1f1f;
             padding: 20px;
@@ -80,6 +99,8 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
             width: 300px;
             margin-bottom: 20px;
+            margin-left: auto;
+            margin-right: auto;
         }
         input {
             width: 100%;
@@ -108,6 +129,8 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            margin-left: auto;
+            margin-right: auto;
         }
         .profile-item {
             display: flex;
@@ -152,6 +175,19 @@
             color: #e0e0e0;
             font-size: 18px;
         }
+        .contact-links a {
+            color: #bb86fc;
+            text-decoration: none;
+            font-size: 24px;
+            margin: 0 10px;
+        }
+        .contact-links a:hover {
+            color: #9b6bfc;
+        }
+        .team-member{
+            color: cadetblue;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -187,15 +223,25 @@
         <section id="about" class="section">
             <h1>About Us</h1>
             <p>ProfileHub is a platform designed to help you manage and showcase your profiles across various platforms. Our mission is to provide a centralized place for all your professional profiles, making it easier for you to share your achievements and connect with others.</p>
+         
         </section>
         <section id="contact" class="section">
             <h1>Contact Us</h1>
             <p>Email: support@profilehub.com</p>
-            <p>Phone: +123 456 7890</p>
+            <p>Phone: +91 7845474916</p>
+            
+            <div class="contact-links">
+                <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            <div class="team-member">Sreejesh S</div>
+            <div class="team-member">Sri Sabari Doss</div>
+            <div class="team-member">Nethra Harshini</div>
+            <div class="team-member">Pranitha N</div>
         </section>
     </div>
     <footer>
-        <p>&copy; 2023 ProfileHub. All rights reserved.</p>
+        <p>&copy; 2024 ProfileHub. All rights reserved.</p>
     </footer>
     <script>
         const registrationForm = document.getElementById('registrationForm');
@@ -312,7 +358,6 @@
             document.getElementById(sectionId).classList.add('active');
         }
 
-        
         showSection('home');
     </script>
 </body>
