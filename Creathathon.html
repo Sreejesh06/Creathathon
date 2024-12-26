@@ -3,28 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Classmates' GitHub Repositories</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/SplitText.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/Observer.min.js"></script>
+    <title>ProfileHub</title>
+    <link rel="icon" href="https://via.placeholder.com/16" type="image/x-icon">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #121212;
             color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background: #1f1f1f;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            color: #bb86fc;
+            font-size: 32px;
+            margin: 0;
+        }
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+        nav a {
+            color: #e0e0e0;
+            text-decoration: none;
+            padding: 10px;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        nav a:hover {
+            background: #444;
+            border-radius: 4px;
+        }
+        .main-content {
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
-            margin: 0;
+            flex: 1;
         }
-
+        .section {
+            display: none;
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #1f1f1f;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .section.active {
+            display: block;
+        }
         h1 {
             margin-bottom: 20px;
             color: #bb86fc;
-            font-size: 24px;
+            font-size: 28px;
         }
-
+        p {
+            font-size: 20px;
+            line-height: 1.6;
+        }
         form {
             background: #1f1f1f;
             padding: 20px;
@@ -33,7 +81,6 @@
             width: 300px;
             margin-bottom: 20px;
         }
-
         input {
             width: 100%;
             padding: 10px;
@@ -42,8 +89,8 @@
             border-radius: 4px;
             background-color: #333;
             color: #e0e0e0;
+            font-size: 18px;
         }
-
         button {
             width: 100%;
             padding: 10px;
@@ -53,28 +100,39 @@
             background-color: #bb86fc;
             color: #121212;
             cursor: pointer;
+            font-size: 18px;
         }
-
-        .username-list {
+        .profile-list {
             width: 300px;
             background: #1f1f1f;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         }
-
-        .username-item {
+        .profile-item {
             display: flex;
             flex-direction: column;
             padding: 10px 0;
             border-bottom: 1px solid #333;
         }
-
-        .username-item:last-child {
+        .profile-item:last-child {
             border-bottom: none;
         }
-
-        .username-item button {
+        .profile-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .profile-item a {
+            color: #bb86fc;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .profile-item a:hover {
+            text-decoration: underline;
+        }
+        .profile-item button {
             margin-top: 10px;
             padding: 5px 10px;
             border: none;
@@ -82,166 +140,180 @@
             background-color: #ff4d4d;
             color: #121212;
             cursor: pointer;
+            font-size: 16px;
         }
-
-        .username-item button.update {
+        .profile-item button.update {
             background-color: #4caf50;
         }
-
-        .repo-list {
-            margin-top: 10px;
-            padding-left: 20px;
-        }
-
-        .repo-item {
-            margin-bottom: 5px;
-        }
-
-        .repo-item a {
-            color: #bb86fc;
-            text-decoration: none;
-        }
-
-        .repo-item a:hover {
-            text-decoration: underline;
-        }
-
-        .profile-pic {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
-
-        .username-header {
-            display: flex;
-            align-items: center;
+        footer {
+            background: #1f1f1f;
+            padding: 15px;
+            text-align: center;
+            color: #e0e0e0;
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <h1 class="split-text">Classmates' GitHub Repositories</h1>
-    <form id="usernameForm">
-        <input type="text" id="usernameInput" placeholder="Enter GitHub username" required>
-        <button type="submit">Add Username</button>
-    </form>
-    <div class="username-list" id="usernameList"></div>
-
+    <header>
+        <h1>ProfileHub</h1>
+        <nav>
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('profiles')">Profiles</a>
+            <a href="#" onclick="showSection('about')">About</a>
+            <a href="#" onclick="showSection('contact')">Contact</a>
+        </nav>
+    </header>
+    <div class="main-content">
+        <section id="home" class="section active">
+            <h1>Welcome to ProfileHub</h1>
+            <p>Your one-stop solution to manage and showcase your profiles.</p>
+            <p>ProfileHub is a platform designed to help you manage and showcase your profiles across various platforms. Whether it's GitHub, LinkedIn, CodeChef, HackerRank, or LeetCode, you can easily register and display your profiles here.</p>
+        </section>
+        <section id="profiles" class="section">
+            <h1>Register Your Profile</h1>
+            <form id="registrationForm">
+                <input type="text" id="name" placeholder="Name" required>
+                <input type="url" id="github" placeholder="GitHub Profile URL">
+                <input type="url" id="linkedin" placeholder="LinkedIn Profile URL">
+                <input type="url" id="codechef" placeholder="CodeChef Profile URL">
+                <input type="url" id="hackerrank" placeholder="HackerRank Profile URL">
+                <input type="url" id="leetcode" placeholder="LeetCode Profile URL">
+                <input type="file" id="profilePic" accept="image/*">
+                <button type="submit">Register</button>
+            </form>
+            <div class="profile-list" id="profileList"></div>
+        </section>
+        <section id="about" class="section">
+            <h1>About Us</h1>
+            <p>ProfileHub is a platform designed to help you manage and showcase your profiles across various platforms. Our mission is to provide a centralized place for all your professional profiles, making it easier for you to share your achievements and connect with others.</p>
+        </section>
+        <section id="contact" class="section">
+            <h1>Contact Us</h1>
+            <p>Email: support@profilehub.com</p>
+            <p>Phone: +123 456 7890</p>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2023 ProfileHub. All rights reserved.</p>
+    </footer>
     <script>
-        const usernameForm = document.getElementById('usernameForm');
-        const usernameInput = document.getElementById('usernameInput');
-        const usernameList = document.getElementById('usernameList');
+        const registrationForm = document.getElementById('registrationForm');
+        const profileList = document.getElementById('profileList');
 
-        let usernames = JSON.parse(localStorage.getItem('usernames')) || [];
+        let profiles = JSON.parse(localStorage.getItem('profiles')) || [];
 
-        usernameForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const username = usernameInput.value.trim();
-            if (username) {
-                usernames.push({ username, repos: [], avatar_url: '' });
-                usernameInput.value = '';
-                fetchUserData(username);
-                saveUsernames();
-                renderUsernames();
-            }
-        });
-
-        function fetchUserData(username) {
-            fetch(`https://api.github.com/users/${username}`)
-                .then(response => response.json())
-                .then(data => {
-                    const user = usernames.find(user => user.username === username);
-                    user.avatar_url = data.avatar_url;
-                    fetchRepositories(username);
-                })
-                .catch(error => console.error('Error fetching user data:', error));
-        }
-
-        function fetchRepositories(username) {
-            fetch(`https://api.github.com/users/${username}/repos`)
-                .then(response => response.json())
-                .then(data => {
-                    const user = usernames.find(user => user.username === username);
-                    user.repos = data;
-                    saveUsernames();
-                    renderUsernames();
-                })
-                .catch(error => console.error('Error fetching repositories:', error));
-        }
-
-        function renderUsernames() {
-            usernameList.innerHTML = '';
-            usernames.forEach((user, index) => {
-                const usernameItem = document.createElement('div');
-                usernameItem.className = 'username-item';
-                usernameItem.innerHTML = `
-                    <div class="username-header">
-                        <img src="${user.avatar_url}" alt="${user.username}'s profile picture" class="profile-pic">
-                        <span>${user.username}</span>
+        function renderProfiles() {
+            profileList.innerHTML = '';
+            profiles.forEach((profile, index) => {
+                const profileItem = document.createElement('div');
+                profileItem.className = 'profile-item';
+                profileItem.innerHTML = `
+                    <div>
+                        ${profile.profilePic ? `<img src="${profile.profilePic}" alt="${profile.name}'s profile picture">` : ''}
+                        <span>${profile.name}</span>
                     </div>
                     <div>
-                        <button class="update" onclick="updateUsername(${index})">Update</button>
-                        <button onclick="deleteUsername(${index})">Delete</button>
+                        ${profile.github ? `<a href="${profile.github}" target="_blank">GitHub</a>` : ''}
+                        ${profile.linkedin ? `<a href="${profile.linkedin}" target="_blank">LinkedIn</a>` : ''}
+                        ${profile.codechef ? `<a href="${profile.codechef}" target="_blank">CodeChef</a>` : ''}
+                        ${profile.hackerrank ? `<a href="${profile.hackerrank}" target="_blank">HackerRank</a>` : ''}
+                        ${profile.leetcode ? `<a href="${profile.leetcode}" target="_blank">LeetCode</a>` : ''}
                     </div>
-                    <div class="repo-list">
-                        ${user.repos.map(repo => `<div class="repo-item"><a href="${repo.html_url}" target="_blank">${repo.name}</a></div>`).join('')}
+                    <div>
+                        <button class="update" onclick="updateProfile(${index})">Update</button>
+                        <button onclick="deleteProfile(${index})">Delete</button>
                     </div>
                 `;
-                usernameList.appendChild(usernameItem);
+                profileList.appendChild(profileItem);
             });
         }
 
-        function updateUsername(index) {
-            const newUsername = prompt('Enter new username:', usernames[index].username);
-            if (newUsername) {
-                usernames[index].username = newUsername;
-                fetchUserData(newUsername);
-                saveUsernames();
-                renderUsernames();
+        renderProfiles();
+
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const github = document.getElementById('github').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const codechef = document.getElementById('codechef').value;
+            const hackerrank = document.getElementById('hackerrank').value;
+            const leetcode = document.getElementById('leetcode').value;
+            const profilePic = document.getElementById('profilePic').files[0];
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const profilePicUrl = e.target.result;
+
+                const profile = {
+                    name,
+                    github,
+                    linkedin,
+                    codechef,
+                    hackerrank,
+                    leetcode,
+                    profilePic: profilePicUrl
+                };
+
+                profiles.push(profile);
+                localStorage.setItem('profiles', JSON.stringify(profiles));
+                renderProfiles();
+
+                registrationForm.reset();
+            };
+
+            if (profilePic) {
+                reader.readAsDataURL(profilePic);
+            } else {
+                const profile = {
+                    name,
+                    github,
+                    linkedin,
+                    codechef,
+                    hackerrank,
+                    leetcode,
+                    profilePic: ''
+                };
+
+                profiles.push(profile);
+                localStorage.setItem('profiles', JSON.stringify(profiles));
+                renderProfiles();
+
+                registrationForm.reset();
             }
+        });
+
+        function updateProfile(index) {
+            const profile = profiles[index];
+            document.getElementById('name').value = profile.name;
+            document.getElementById('github').value = profile.github;
+            document.getElementById('linkedin').value = profile.linkedin;
+            document.getElementById('codechef').value = profile.codechef;
+            document.getElementById('hackerrank').value = profile.hackerrank;
+            document.getElementById('leetcode').value = profile.leetcode;
+
+            profiles.splice(index, 1);
+            localStorage.setItem('profiles', JSON.stringify(profiles));
+            renderProfiles();
         }
 
-        function deleteUsername(index) {
-            usernames.splice(index, 1);
-            saveUsernames();
-            renderUsernames();
+        function deleteProfile(index) {
+            profiles.splice(index, 1);
+            localStorage.setItem('profiles', JSON.stringify(profiles));
+            renderProfiles();
         }
 
-        function saveUsernames() {
-            localStorage.setItem('usernames', JSON.stringify(usernames));
-        }
-
-        // Initial render
-        usernames.forEach(user => fetchUserData(user.username));
-        renderUsernames();
-
-        // GSAP SplitText and Observer effects
-        gsap.registerPlugin(SplitText, Observer);
-
-        const splitTextElements = document.querySelectorAll('.split-text');
-        splitTextElements.forEach(element => {
-            const split = new SplitText(element, { type: 'words, chars' });
-            gsap.from(split.chars, {
-                duration: 1,
-                opacity: 0,
-                y: 50,
-                stagger: 0.05,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: element,
-                    start: 'top 80%',
-                    end: 'bottom 20%',
-                    toggleActions: 'play none none reverse'
-                }
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
             });
-        });
+            document.getElementById(sectionId).classList.add('active');
+        }
 
-        Observer.create({
-            target: window,
-            type: 'scroll',
-            onEnter: () => gsap.to('body', { backgroundColor: '#121212', color: '#e0e0e0' }),
-            onLeaveBack: () => gsap.to('body', { backgroundColor: '#f4f4f4', color: '#333' })
-        });
+        
+        showSection('home');
     </script>
 </body>
 </html>
