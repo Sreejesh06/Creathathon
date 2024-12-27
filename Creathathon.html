@@ -9,7 +9,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
+            background: linear-gradient(to right, #576574, #C2B6B6);
             color: #e0e0e0;
             margin: 0;
             padding: 0;
@@ -79,8 +79,9 @@
         .team-member {
             font-size: 22px;
             margin: 10px 0;
+            text-align: center; /* Center the team members */
         }
-        /* .team-member:nth-child(1) {
+        .team-member:nth-child(1) {
             color: #ff6f61;
         }
         .team-member:nth-child(2) {
@@ -91,7 +92,7 @@
         }
         .team-member:nth-child(4) {
             color: #f7cac9;
-        } */
+        }
         form {
             background: #1f1f1f;
             padding: 20px;
@@ -184,10 +185,6 @@
         .contact-links a:hover {
             color: #9b6bfc;
         }
-        .team-member{
-            color: cadetblue;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -218,26 +215,25 @@
                 <input type="file" id="profilePic" accept="image/*">
                 <button type="submit">Register</button>
             </form>
+            <input type="text" id="searchBar" placeholder="Search profiles by name" onkeyup="searchProfiles()">
             <div class="profile-list" id="profileList"></div>
         </section>
         <section id="about" class="section">
             <h1>About Us</h1>
             <p>ProfileHub is a platform designed to help you manage and showcase your profiles across various platforms. Our mission is to provide a centralized place for all your professional profiles, making it easier for you to share your achievements and connect with others.</p>
-         
+            <div class="team-member">Sreejesh S</div>
+            <div class="team-member">Sri Sabari Doss</div>
+            <div class="team-member">Nethra Harshini</div>
+            <div class="team-member">Pranitha N</div>
         </section>
         <section id="contact" class="section">
             <h1>Contact Us</h1>
             <p>Email: support@profilehub.com</p>
             <p>Phone: +91 7845474916</p>
-            
             <div class="contact-links">
                 <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
             </div>
-            <div class="team-member">Sreejesh S</div>
-            <div class="team-member">Sri Sabari Doss</div>
-            <div class="team-member">Nethra Harshini</div>
-            <div class="team-member">Pranitha N</div>
         </section>
     </div>
     <footer>
@@ -246,12 +242,13 @@
     <script>
         const registrationForm = document.getElementById('registrationForm');
         const profileList = document.getElementById('profileList');
+        const searchBar = document.getElementById('searchBar');
 
         let profiles = JSON.parse(localStorage.getItem('profiles')) || [];
 
-        function renderProfiles() {
+        function renderProfiles(filteredProfiles = profiles) {
             profileList.innerHTML = '';
-            profiles.forEach((profile, index) => {
+            filteredProfiles.forEach((profile, index) => {
                 const profileItem = document.createElement('div');
                 profileItem.className = 'profile-item';
                 profileItem.innerHTML = `
@@ -273,6 +270,12 @@
                 `;
                 profileList.appendChild(profileItem);
             });
+        }
+
+        function searchProfiles() {
+            const searchTerm = searchBar.value.toLowerCase();
+            const filteredProfiles = profiles.filter(profile => profile.name.toLowerCase().includes(searchTerm));
+            renderProfiles(filteredProfiles);
         }
 
         renderProfiles();
