@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ProfileHub</title>
-    <link rel="icon" href="https://via.placeholder.com/16" type="image/x-icon">
+    <link rel="icon" href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2F16x16&psig=AOvVaw1PnJB1KHaiNuLvCrNIeXL1&ust=1735364166864000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLj1qridx4oDFQAAAAAdAAAAABAE" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #576574, #C2B6B6);
+            background: linear-gradient(to right, #170E13, #7A7ADB);
             color: #e0e0e0;
             margin: 0;
             padding: 0;
@@ -18,12 +18,14 @@
             min-height: 100vh;
         }
         header {
-            background: #1f1f1f;
+            background: rgba(31, 31, 31, 0.8);
             padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 4px rgba(157, 146, 146, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
         }
         header h1 {
             color: #bb86fc;
@@ -42,7 +44,7 @@
             transition: background 0.3s;
         }
         nav a:hover {
-            background: #444;
+            background: rgba(68, 68, 68, 0.8);
             border-radius: 4px;
         }
         .main-content {
@@ -58,9 +60,11 @@
             max-width: 800px;
             margin: 20px 0;
             padding: 20px;
-            background: #1f1f1f;
-            border-radius: 8px;
+            background: rgba(31, 31, 31, 0.8);
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         .section.active {
             display: block;
@@ -68,18 +72,18 @@
         h1 {
             margin-bottom: 20px;
             color: #bb86fc;
-            font-size: 36px;  
-            text-align: center;  
+            font-size: 36px; /* Increased font size */
+            text-align: center; /* Center the h1 */
         }
         p {
-            font-size: 22px;  
-            line-height: 1.8;  
-            margin-bottom: 20px;  
+            font-size: 22px; /* Increased font size */
+            line-height: 1.8; /* Increased line height */
+            margin-bottom: 20px; /* Added margin for spacing */
         }
         .team-member {
             font-size: 22px;
             margin: 10px 0;
-            text-align: center; 
+            text-align: center; /* Center the team members */
         }
         .team-member:nth-child(1) {
             color: #ff6f61;
@@ -94,10 +98,12 @@
             color: #f7cac9;
         }
         form {
-            background: #1f1f1f;
+            background: rgba(31, 31, 31, 0.8);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             width: 300px;
             margin-bottom: 20px;
             margin-left: auto;
@@ -126,10 +132,12 @@
         }
         .profile-list {
             width: 300px;
-            background: #1f1f1f;
+            background: rgba(31, 31, 31, 0.8);
             padding: 20px;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             margin-left: auto;
             margin-right: auto;
         }
@@ -170,11 +178,13 @@
             background-color: #4caf50;
         }
         footer {
-            background: #1f1f1f;
+            background: rgba(31, 31, 31, 0.8);
             padding: 15px;
             text-align: center;
             color: #e0e0e0;
             font-size: 18px;
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
         }
         .contact-links a {
             color: #bb86fc;
@@ -257,11 +267,11 @@
                         <span>${profile.name}</span>
                     </div>
                     <div>
-                        ${profile.github ? `<a href="${profile.github}" target="_blank">GitHub</a>` : ''}
-                        ${profile.linkedin ? `<a href="${profile.linkedin}" target="_blank">LinkedIn</a>` : ''}
-                        ${profile.codechef ? `<a href="${profile.codechef}" target="_blank">CodeChef</a>` : ''}
-                        ${profile.hackerrank ? `<a href="${profile.hackerrank}" target="_blank">HackerRank</a>` : ''}
-                        ${profile.leetcode ? `<a href="${profile.leetcode}" target="_blank">LeetCode</a>` : ''}
+                        ${profile.github ? `<a href="${profile.github}" target="_blank"><i class="fab fa-github"></i></a>` : ''}
+                        ${profile.linkedin ? `<a href="${profile.linkedin}" target="_blank"><i class="fab fa-linkedin"></i></a>` : ''}
+                        ${profile.codechef ? `<a href="${profile.codechef}" target="_blank"><i class="fas fa-code"></i></a>` : ''}
+                        ${profile.hackerrank ? `<a href="${profile.hackerrank}" target="_blank"><i class="fab fa-hackerrank"></i></a>` : ''}
+                        ${profile.leetcode ? `<a href="${profile.leetcode}" target="_blank"><i class="fas fa-code"></i></a>` : ''}
                     </div>
                     <div>
                         <button class="update" onclick="updateProfile(${index})">Update</button>
